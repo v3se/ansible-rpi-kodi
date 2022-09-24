@@ -1,0 +1,23 @@
+---
+- name: Ensure group kodi exists
+  ansible.builtin.group:
+    name: kodi
+    state: present
+- name: Add the user kodi
+  ansible.builtin.user:
+    name: kodi
+    comment: User that runs the Kodi service
+    group: kodi
+    groups: cdrom,audio,render,video,plugdev,users,dialout,dip,input
+    append: yes
+    state: present
+- name: Create kodi directory structure for libraries
+  ansible.builtin.file:
+    path: "/home/kodi/{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - Videos
+    - Pictures
+
+

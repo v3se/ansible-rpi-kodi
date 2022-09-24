@@ -1,0 +1,6 @@
+---
+- name: Install kodi and other packages required
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ vese_kodi_packages }}"

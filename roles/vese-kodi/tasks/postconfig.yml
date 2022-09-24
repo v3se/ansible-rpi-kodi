@@ -1,0 +1,7 @@
+---
+- name: Add autostart command to kodi user crontab
+  ansible.builtin.cron:
+    name: "kodi autostart"
+    special_time: reboot
+    job: "screen -d -S kodi-standalone -m kodi --standalone"
+    user: kodi

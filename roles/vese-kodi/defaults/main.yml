@@ -1,0 +1,10 @@
+---
+# defaults file for vese-kodi
+vese_kodi_autostart_kodi: true
+vese_kodi_packages:
+  - cron
+  - screen
+  - acl
+  - kodi
+
+

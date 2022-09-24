@@ -1,0 +1,12 @@
+- name: Boostrap Kodi
+  block:
+  - name: Check if kodi screen is up
+    ansible.builtin.shell:  screen -ls | grep -q .kodi-standalone && echo running || echo inactive
+    register: vese_kodi_screen_status
+    changed_when: false
+  - name: Start kodi
+    ansible.builtin.shell: screen -d -S kodi-standalone -m kodi --standalone
+    when: vese_kodi_screen_status.stdout != "running"
+  become: true
+  become_user: kodi
+  when: vese_kodi_autostart_kodi
