@@ -1,0 +1,25 @@
+---
+- name: Install kodi and other packages required
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ vese_kodi_packages }}"
+- name: Install kodi as a systemd service
+  block:
+  - name: Run Kodi service make 'install' target as root
+    ansible.builtin.make:
+      chdir: '{{ vese_kodi_local_git_path }}'
+      target: install
+  - name: Run systemd-sysusers to create kodi user and groups. Set graphical boot target.
+    ansible.builtin.shell: |
+      systemd-sysusers
+      systemd-tmpfiles --create
+      systemctl set-default graphical.target
+  - name: Enable service kodi
+    ansible.builtin.systemd:
+      name: kodi
+      enabled: yes
+  when: vese_kodi_standalone_release.changed
+  become: true
+  notify: Reboot
+

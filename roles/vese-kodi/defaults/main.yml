@@ -1,10 +1,21 @@
 ---
 # defaults file for vese-kodi
-vese_kodi_autostart_kodi: true
+# reboot even if no reboot handler is notified
+vese_kodi_reboot: false
+# path to the dir where the kodi-standalone-service repo will be cloned
+vese_kodi_local_git_path: "{{ ansible_env.HOME }}/kodi-standalone-service"
+# URL to the kodi-standalone-service git repo
+vese_kodi_standalone_repo: https://github.com/graysky2/kodi-standalone-service.git
+vese_kodi_standalone_version: v1.136
+# dependencies that needs to be installed
 vese_kodi_packages:
-  - cron
-  - screen
-  - acl
-  - kodi
-
+  - acl=2.2.53-10
+  - libgl1-mesa-dri=20.3.5-1+rpt4+rpi1
+  - kodi=2:19.4-2~bullseye
+  - kodi-inputstream-adaptive=19.0.3-2~bullseye
+# Links to kodi plugin repositories that will be installed to the addons directory
+vese_kodi_inputstreamhelper_url: https://github.com/emilsvennesson/script.module.inputstreamhelper/releases/download/v0.5.10/script.module.inputstreamhelper-0.5.10+matrix.1.zip
+vese_kodi_plugins:
+  - https://github.com/MrKrabat/plugin.video.crunchyroll.git
+vese_kodi_home_dir: /var/lib/kodi
 

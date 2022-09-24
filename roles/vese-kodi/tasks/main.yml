@@ -1,7 +1,6 @@
 ---
 # tasks file for vese-kodi
 - include_tasks: preconfig.yml
-- include_tasks: install.yml
+- include_tasks: install_kodi.yml
+- include_tasks: install_plugins.yml
 - include_tasks: postconfig.yml
-- include_tasks: start_kodi.yml
-
