@@ -12,6 +12,7 @@
       src: "{{ vese_kodi_inputstreamhelper_filename.dest }}"
       dest: '{{ vese_kodi_home_dir }}/.kodi/addons/'
       remote_src: yes
+      creates: '{{ vese_kodi_home_dir }}/.kodi/addons/script.module.inputstreamhelper'
   - name: Clone plugins
     ansible.builtin.git:
       repo: '{{ item }}'

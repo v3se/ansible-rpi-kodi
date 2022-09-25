@@ -8,7 +8,6 @@
     pre_reboot_delay: 0
     post_reboot_delay: 30
     test_command: systemctl is-active --quiet kodi
-  become: true
 - name: Restart Kodi
   ansible.builtin.systemd:
     name: kodi

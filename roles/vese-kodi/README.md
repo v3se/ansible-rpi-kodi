@@ -1,38 +1,26 @@
-Role Name
+vese kodi
 =========
 
-A brief description of the role goes here.
-
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+This role installs and configures [Kodi](https://kodi.tv/) Media Center to Raspberry Pi 4 running Raspberry Pi OS. It's utilizing [kodi-standalone](https://github.com/graysky2/kodi-standalone-service) to run as a systemd service. This role also installs addons from Github. You can install additional addons by adding the Github repository links to defaults/main.yml.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+| Name                           | Description                                                                                |
+|--------------------------------|--------------------------------------------------------------------------------------------|
+| vese_kodi_local_git_path       | Path where the kodi-standalone repo will be cloned. Defaults to the Ansible user home dir. |
+| vese_kodi_standalone_repo      | URL to the kodi-standalone repo                                                            |
+| vese_kodi_standalone_version   | Version of the kodi-standalone                                                             |
+| vese_kodi_packages             | Packages to be installed including Kodi itself                                             |
+| vese_kodi_inputsreamhelper_url | URL to inputstreamhelper Github repo                                                       |
+| vese_kodi_plugins              | List of kodi plugins that will be clone from Github to the addons dir                      |
+| vese_kodi_home_dir             | Defaults to /var/lib/kodi                                                                  |
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - hosts: all
       roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+         - { role: vese-kodi, become: yes }
