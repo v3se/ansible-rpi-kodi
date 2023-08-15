@@ -3,4 +3,5 @@
 - include_tasks: preconfig.yml
 - include_tasks: install_kodi.yml
 - include_tasks: install_plugins.yml
+- include_tasks: install_nordvpn.yml
 - include_tasks: postconfig.yml

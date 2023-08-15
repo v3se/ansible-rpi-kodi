@@ -1,0 +1,48 @@
+---
+- name: Check if gpg file exists
+  stat:
+    path: /usr/share/keyrings/nordvpn-archive-keyring.gpg
+  register: gpg_file
+
+- name: Install GPG Key
+  ansible.builtin.shell: |
+    curl -L https://repo.nordvpn.com/gpg/nordvpn_public.asc | gpg --dearmor | sudo tee /usr/share/keyrings/nordvpn-archive-keyring.gpg >/dev/null
+    echo "deb [signed-by=/usr/share/keyrings/nordvpn-archive-keyring.gpg] https://repo.nordvpn.com/deb/nordvpn/debian stable main" | sudo tee  /etc/apt/sources.list.d/nordvpn.list
+  when: not gpg_file.stat.exists
+
+- name: Install nordvpn
+  ansible.builtin.apt:
+    update_cache: yes
+    name: nordvpn
+    state: present
+
+- name: Adding user kodi to nordvpn group
+  user:
+    name: kodi
+    groups: nordvpn
+    append: yes
+
+- name: Nordvpn Login
+  ansible.builtin.shell: nordvpn login --token {{ nordvpn_token }}
+  ignore_errors: True
+  become: true
+  become_user: kodi
+  register: nordvpn_login_out
+
+- debug: msg="{{ nordvpn_login_out.stdout }}"
+
+- copy:
+    src: nordvpn_connect_canada.sh
+    dest: /home/kodi/nordvpn_connect_canada.sh
+    owner: kodi
+    group: kodi
+    mode: u=rwx,g=rx,o=r
+
+- copy:
+    src: nordvpn_disconnect.sh
+    dest: /home/kodi/nordvpn_disconnect.sh
+    owner: kodi
+    group: kodi
+    mode: u=rwx,g=rx,o=r
+
+

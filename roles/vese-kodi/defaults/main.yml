@@ -16,6 +16,6 @@ vese_kodi_packages:
 # Links to kodi plugin repositories that will be installed to the addons directory
 vese_kodi_inputstreamhelper_url: https://github.com/emilsvennesson/script.module.inputstreamhelper/releases/download/v0.5.10/script.module.inputstreamhelper-0.5.10+matrix.1.zip
 vese_kodi_plugins:
-  - https://github.com/MrKrabat/plugin.video.crunchyroll.git
+  - { url: https://github.com/MrKrabat/plugin.video.crunchyroll.git, version: 00279f4d0d8c397052cd09c79aff6a0ca3cf731d } # Version can be commit hash, tag or version number
 vese_kodi_home_dir: /var/lib/kodi
 

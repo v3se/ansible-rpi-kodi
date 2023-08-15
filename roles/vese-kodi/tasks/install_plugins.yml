@@ -15,11 +15,12 @@
       creates: '{{ vese_kodi_home_dir }}/.kodi/addons/script.module.inputstreamhelper'
   - name: Clone plugins
     ansible.builtin.git:
-      repo: '{{ item }}'
+      repo: '{{ item.url }}'
       dest: '{{ vese_kodi_home_dir }}/.kodi/addons/{{ repo_name }}'
+      version: '{{ item.version }}'
     loop: '{{ vese_kodi_plugins }}'
     vars:
-      repo_name: "{{ item.split('/') | last | replace('.git', '') }}"
+      repo_name: "{{ item.url.split('/') | last | replace('.git', '') }}"
     register: vese_kodi_plugin_install
     become: true
     become_user: kodi
@@ -27,4 +28,10 @@
       - vese_kodi_plugin_install.failed
       - not 'Local modifications exist in repository' in vese_kodi_plugin_install.msg
   notify: Restart Kodi
+- copy:
+    src: favourites.xml
+    dest: '{{ vese_kodi_home_dir }}/favourites.xml'
+    owner: kodi
+    group: kodi
+    mode: u=rw,g=r,o=r
 

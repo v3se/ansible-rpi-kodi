@@ -1,0 +1,4 @@
+<favourites>
+<favourite name="nordvpn_connect_canada">System.Exec(&quot;/home/kodi/nordvpn_connect_canada.sh&quot;)</favourite>
+<favourite name="nordvpn_disconnect">System.Exec(&quot;/home/kodi/nordvpn_disconnect.sh&quot;)</favourite>
+</favourites>

@@ -22,4 +22,11 @@
   when: vese_kodi_standalone_release.changed
   become: true
   notify: Reboot
+- copy:
+    src: favourites.xml
+    dest: '{{ vese_kodi_home_dir }}/.kodi/userdata/favourites.xml'
+    owner: kodi
+    group: kodi
+    mode: u=rw,g=r,o=r
+  notify: Restart Kodi
 

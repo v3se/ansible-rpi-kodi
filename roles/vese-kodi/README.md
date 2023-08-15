@@ -15,6 +15,7 @@ Role Variables
 | vese_kodi_inputsreamhelper_url | URL to inputstreamhelper Github repo                                                       |
 | vese_kodi_plugins              | List of kodi plugins that will be clone from Github to the addons dir                      |
 | vese_kodi_home_dir             | Defaults to /var/lib/kodi                                                                  |
+| nordvpn_token             | Nordvpn token to login to your account                                                                  |
 
 Example Playbook
 ----------------
