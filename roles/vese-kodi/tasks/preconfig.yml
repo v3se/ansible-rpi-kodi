@@ -5,5 +5,25 @@
     dest: '{{ vese_kodi_local_git_path }}'
     version: '{{ vese_kodi_standalone_version }}'
   register: vese_kodi_standalone_release
+- name: Copy powerbutton listener python script
+  ansible.builtin.copy:
+    src: listen-for-shutdown.py
+    dest: '/usr/bin/local/'
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+- name: Copy powerbutton listener shell script
+  ansible.builtin.copy:
+    src: listen-for-shutdown.sh
+    dest: '/etc/init.d'
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+  register: vese_kodi_pwrbutton
+- name: Enable powerbutton script on startup
+  ansible.builtin.shell: |
+    update-rc.d listen-for-shutdown.sh defaults
+    /etc/init.d/listen-for-shutdown.sh start
+  when: vese_kodi_pwrbutton.changed
 
 

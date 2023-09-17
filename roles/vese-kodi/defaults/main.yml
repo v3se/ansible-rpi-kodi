@@ -2,6 +2,8 @@
 # defaults file for vese-kodi
 # reboot even if no reboot handler is notified
 vese_kodi_reboot: false
+# enables a listener for gpio connected powerbutton
+vese_kodi_enable_pwbtn_listener: true
 # path to the dir where the kodi-standalone-service repo will be cloned
 vese_kodi_local_git_path: "{{ ansible_env.HOME }}/kodi-standalone-service"
 # URL to the kodi-standalone-service git repo
